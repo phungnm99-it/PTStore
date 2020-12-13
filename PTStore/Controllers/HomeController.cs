@@ -22,8 +22,17 @@ namespace PTStore.Controllers
         public IActionResult Index()
         {
             var s = context.DienThoais.Where(x => x.DienThoaiId == 3).FirstOrDefault();
+            GopY sb = new GopY();
+            sb.SoDienThoai = "0964840435";
+            sb.ChuDe = "Danh gia website";
+            sb.Email = "phungnm99@gmail.com";
+            sb.NoiDung = "Website OK";
+            context.GopY.Add(sb);
+            context.SaveChanges();
+            var y = context.GopY.Where(x => x.Email == "phungnm99@gmail.com").FirstOrDefault();
             ViewData["Image"] = s.HinhAnh;
             ViewData["Name"] = s.Name;
+            ViewData["EmailName"] = y.NoiDung;
             return View();
         }
 
