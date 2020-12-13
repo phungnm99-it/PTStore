@@ -27,6 +27,9 @@ namespace PTStore.Models
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
 
+        public virtual DbSet<Subcriber> Subcribers { get; set; }
+        public virtual DbSet<GopY> GopY { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -37,6 +40,26 @@ namespace PTStore.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<GopY>(entity =>
+            {
+                entity.ToTable("GopY");
+
+                entity.Property(e => e.Email).IsUnicode(false);
+                entity.Property(e => e.SoDienThoai).IsUnicode(false);
+                //entity.Property(e => e.ChuDe).IsUnicode(true);
+                //entity.Property(e => e.NoiDung).IsUnicode(true);
+
+            });
+
+            modelBuilder.Entity<Subcriber>(entity =>
+            {
+                entity.ToTable("Subcriber");
+
+                entity.Property(e => e.Email).IsUnicode(false);
+                entity.Property(e => e.TrangThai).IsUnicode(false);
+
+            });
+
             modelBuilder.Entity<Account>(entity =>
             {
                 entity.ToTable("Account");
