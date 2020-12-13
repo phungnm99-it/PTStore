@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PTStore.Models;
 
 namespace PTStore
 {
@@ -24,6 +26,8 @@ namespace PTStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<PTStoreContext>(options =>
+                options.UseSqlServer("Server=DESKTOP-9J29I14;Database=PTStore;Trusted_Connection=True;"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,10 +52,38 @@ namespace PTStore
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapAreaControllerRoute(
+                    name: "Admin",
+                    areaName: "Admin",
+                    pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
+
+                //endpoints.MapAreaControllerRoute(
+                //    name: "Admin",
+                //    areaName: "Admin",
+                //    pattern: "Admin/{controller=ThuongHieu}/{action=Index}/{id?}");
+
+                //endpoints.MapAreaControllerRoute(
+                //    name: "default",
+                //    areaName: "Admin",
+                //    pattern: "{controller=AdminHome}/{action=AdminIndex}/{id?}"
+                //    );
+
+                endpoints.MapAreaControllerRoute(
+                    name: "Customer",
+                    areaName: "Customer",
+                    pattern: "Customer/{controller=Home}/{action=Index}/{id?}");
+
+                //endpoints.MapAreaControllerRoute(
+                //    name: "Guess",
+                //    areaName: "Guess",
+                //    pattern: "{controller=Home}/{action=Index}/{id?}"
+                //    );
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }
