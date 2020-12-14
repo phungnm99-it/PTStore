@@ -22,13 +22,6 @@ namespace PTStore.Controllers
         public IActionResult Index()
         {
             var s = context.DienThoais.Where(x => x.DienThoaiId == 3).FirstOrDefault();
-            GopY sb = new GopY();
-            sb.SoDienThoai = "0964840435";
-            sb.ChuDe = "Danh gia website";
-            sb.Email = "phungnm99@gmail.com";
-            sb.NoiDung = "Website OK";
-            context.GopY.Add(sb);
-            context.SaveChanges();
             var y = context.GopY.Where(x => x.Email == "phungnm99@gmail.com").FirstOrDefault();
             ViewData["Image"] = s.HinhAnh;
             ViewData["Name"] = s.Name;
@@ -45,6 +38,48 @@ namespace PTStore.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Login()
+        {
+
+            return View();
+        }
+        public IActionResult Detail()
+        {
+
+            return View();
+        }
+        public IActionResult Signup()
+        {
+            return View();
+        }
+
+        public IActionResult Cart()
+        {
+            return View();
+        }
+        public IActionResult Checkout()
+        {
+            return View();
+        }
+        
+        public IActionResult Forgetpassword()
+        {
+            return View();
+        }
+        public IActionResult Product()
+        {
+            return View();
+        }
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        public IActionResult City()
+        {
+            return View();
         }
     }
 }
